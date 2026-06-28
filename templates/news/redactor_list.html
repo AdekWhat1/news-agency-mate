@@ -11,7 +11,16 @@
     <a href="{% url 'news:redactor-create' %}" class="btn btn-primary btn-sm text-uppercase">Hire Journalist</a>
 </div>
 
-{% if redactors_list %}
+	<form method="get" action="" class="mb-4">
+    <div class="input-group shadow-sm rounded-3 overflow-hidden">
+        {{ search_form }}
+        <button class="btn btn-primary px-4" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+	</form>
+
+{% if redactor_list %}
     <div class="table-responsive shadow-sm rounded mb-4">
         <table class="table table-hover align-middle bg-white m-0">
             <thead class="table-dark">
@@ -22,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for redactor in redactors_list %}
+                {% for redactor in redactor_list %}
                     <tr>
                         <td class="px-4 fw-bold text-primary">
                           <a href="{% url 'news:redactor-detail' pk=redactor.id %}">@{{ redactor.username }}</a>

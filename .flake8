@@ -1,0 +1,11 @@
+[flake8]
+inline-quotes = "
+
+exclude =
+    .git,
+    __pycache__,
+    */migrations/*,
+    .venv,
+    venv
+
+max-line-length = 88
