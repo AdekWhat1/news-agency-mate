@@ -21,7 +21,9 @@
             <tbody>
                 {% for redactor in redactors_list %}
                     <tr>
-                        <td class="px-4 fw-bold text-primary">@{{ redactor.username }}</td>
+                        <td class="px-4 fw-bold text-primary">
+                          <a href="{% url 'news:redactor-detail' pk=redactor.id %}">@{{ redactor.username }}</a>
+                        </td>
 
                         <td class="text-secondary">
                             {% if redactor.first_name or redactor.last_name %}

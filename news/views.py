@@ -50,8 +50,27 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
         ).prefetch_related("publishers").order_by("published_date")
 
 
+class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Newspaper
+    context_object_name = "newspaper"
+    template_name = "news/newspaper_detail.html"
+
+    def get_queryset(self):
+        return Newspaper.objects.select_related(
+            "topic"
+        ).prefetch_related("publishers")
+
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = get_user_model()
     context_object_name = "redactors_list"
     template_name = "news/redactor_list.html"
     paginate_by = 5
+
+
+class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
+    model = get_user_model()
+    context_object_name = "redactor"
+    template_name = "news/redactor_detail.html"
+
+    def get_queryset(self):
+        return Redactor.objects.prefetch_related("newspapers__topic")
