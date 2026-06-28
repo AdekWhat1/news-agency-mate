@@ -6,7 +6,10 @@
 {% block header_subtitle %}Professional journalists and editors of our agency{% endblock %}
 
 {% block content %}
-<h3 class="fw-bold mb-4">Journalists Catalogue</h3>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold m-0">Journalists Catalogue</h3>
+    <a href="{% url 'news:redactor-create' %}" class="btn btn-primary btn-sm text-uppercase">Hire Journalist</a>
+</div>
 
 {% if redactors_list %}
     <div class="table-responsive shadow-sm rounded mb-4">
