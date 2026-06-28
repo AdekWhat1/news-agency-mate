@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Newspapers - News Agency{% endblock %}
+
+{% block header_title %}All Publications{% endblock %}
+{% block header_subtitle %}Explore our full archive of articles and breaking news{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold m-0">Newspapers Catalogue</h3>
+    <a href="#!" class="btn btn-primary btn-sm text-uppercase">Write Article</a>
+</div>
+
+{% if newspapers_list %}
+    {% for newspaper in newspapers_list %}
+        <div class="post-preview">
+            <a href="#!">
+                <h2 class="post-title">{{ newspaper.title }}</h2>
+                <h3 class="post-subtitle fs-6">
+                    <span class="badge bg-secondary">{{ newspaper.topic.name }}</span>
+                </h3>
+            </a>
+            <p class="post-meta">
+                Published on {{ newspaper.published_date|date:"F d, Y" }} by
+                {% for publisher in newspaper.publishers.all %}
+                    <a href="#!">{{ publisher.username }}</a>{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    Anonymous
+                {% endfor %}
+            </p>
+        </div>
+        <hr class="my-4" />
+    {% endfor %}
+
+    {% include "includes/pagination.html" %}
+
+{% else %}
+    <div class="alert alert-info text-center" role="alert">
+        No articles found in the database.
+    </div>
+{% endif %}
+{% endblock %}
