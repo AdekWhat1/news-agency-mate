@@ -23,16 +23,25 @@ class RedactorCreationForm(UserCreationForm):
             "years_of_experience",
         )
 
+    def clean_years_of_experience(self):
+        years = self.cleaned_data.get("years_of_experience")
+        if years is not None and years < 0:
+            raise forms.ValidationError("Years of experience must be positive")
+
+        return years
+
 
 class NewspaperSearchForm(forms.Form):
     title = forms.CharField(
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "placeholder": "Search articles by title..."
-        }),
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Search articles by title...",
+            }
+        ),
     )
 
 
@@ -41,8 +50,7 @@ class RedactorSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "placeholder": "Search by username..."
-        }),
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Search by username..."}
+        ),
     )
