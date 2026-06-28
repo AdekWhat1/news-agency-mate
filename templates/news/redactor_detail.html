@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}@{{ redactor.username }}'s Profile - News Agency{% endblock %}
+
+{% block header_title %}
+    {% if redactor.first_name or redactor.last_name %}
+        {{ redactor.first_name }} {{ redactor.last_name }}
+    {% else %}
+        @{{ redactor.username }}
+    {% endif %}
+{% endblock %}
+{% block header_subtitle %}Journalist & Editor Profile{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-0 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+
+            <div class="card bg-light border-0 shadow-sm rounded-4 mb-5">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold text-dark mb-3">Personal Information</h4>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Username</span>
+                            <strong class="text-primary fs-5">@{{ redactor.username }}</strong>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="text-muted d-block small">Email Address</span>
+                            <strong class="text-dark">{{ redactor.email|default:"No email provided" }}</strong>
+                        </div>
+                        <div class="col-12">
+                            <hr class="my-2">
+                            <span class="text-muted d-block small mb-1">Professional Experience</span>
+                            <span class="badge bg-dark px-3 py-2 fs-6">{{ redactor.years_of_experience }} years in journalism</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="fw-bold mb-4">Publications by this author</h3>
+
+            {% if redactor.newspapers.all %}
+                <div class="p-4 bg-white rounded-4 shadow-sm border">
+                    {% for newspaper in redactor.newspapers.all %}
+                        <div class="post-preview">
+                            <a href="{% url 'news:newspaper-detail' pk=newspaper.id %}">
+                                <h4 class="post-title fs-4 fw-bold text-dark mb-1">{{ newspaper.title }}</h4>
+                                <span class="badge bg-secondary mb-2">{{ newspaper.topic.name }}</span>
+                            </a>
+                            <p class="post-meta small text-muted">
+                                Published on {{ newspaper.published_date|date:"F d, Y" }}
+                            </p>
+                        </div>
+                        {% if not forloop.last %}<hr class="my-3" />{% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info text-center rounded-4" role="alert">
+                    This journalist hasn't published any articles yet.
+                </div>
+            {% endif %}
+
+            <div class="mt-4">
+                <a class="btn btn-outline-secondary px-4 py-2 text-uppercase fw-bold shadow-sm" href="{% url 'news:redactor-list' %}">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Team
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

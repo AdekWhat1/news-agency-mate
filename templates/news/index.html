@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+  {% block title %}Home - News Agency{% endblock %}
+  {% block header_title %}News Agency Portal{% endblock %}
+  {% block header_subtitle %}Welcome! You have visited this page {{ num_visits }} time(s).{% endblock %}
+  {% block content %}
+<div class="row text-center mb-5">
+    <div class="col-md-4 mb-3">
+        <div class="card border-primary h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-primary">All Newspapers</h5>
+                <p class="display-6 fw-bold m-0">{{ num_newspaper }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card border-success h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-success">Our Redactors</h5>
+                <p class="display-6 fw-bold m-0">{{ num_redactor }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card border-info h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-info">Total Topics</h5>
+                <p class="display-6 fw-bold m-0">{{ num_topic }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mb-4 fw-bold">Latest Publications</h3>
+
+{% for newspaper in latest_newspapers %}
+    <div class="post-preview">
+        <a href="{% url 'news:newspaper-detail' pk=newspaper.id%}">
+            <h2 class="post-title">{{ newspaper.title }}</h2>
+            <h3 class="post-subtitle">
+                <span class="badge bg-secondary fs-6">{{ newspaper.topic.name }}</span>
+            </h3>
+        </a>
+        <p class="post-meta">
+            Published on {{ newspaper.published_date|date:"F d, Y" }} by
+            {% for publisher in newspaper.publishers.all %}
+                <a href="{% url 'news:redactor-detail' pk=publisher.id%}">{{ publisher.username }}</a>{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                Anonymous
+            {% endfor %}
+        </p>
+    </div>
+    <hr class="my-4" />
+{% empty %}
+    <p>No newspapers available yet.</p>
+{% endfor %}
+
+{% endblock %}

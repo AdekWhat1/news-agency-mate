@@ -1,0 +1,212 @@
+[
+  {
+    "model": "news.topic",
+    "pk": 1,
+    "fields": { "name": "Politics" }
+  },
+  {
+    "model": "news.topic",
+    "pk": 2,
+    "fields": { "name": "Business & Finance" }
+  },
+  {
+    "model": "news.topic",
+    "pk": 3,
+    "fields": { "name": "Technology" }
+  },
+  {
+    "model": "news.topic",
+    "pk": 4,
+    "fields": { "name": "World News" }
+  },
+  {
+    "model": "news.topic",
+    "pk": 5,
+    "fields": { "name": "Culture & Art" }
+  },
+  {
+    "model": "news.redactor",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$fakehash$1234567890abcdef",
+      "is_superuser": false,
+      "username": "john_doe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@agency.com",
+      "is_staff": true,
+      "is_active": true,
+      "years_of_experience": 5
+    }
+  },
+  {
+    "model": "news.redactor",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$fakehash$1234567890abcdef",
+      "is_superuser": false,
+      "username": "alex_smith",
+      "first_name": "Alex",
+      "last_name": "Smith",
+      "email": "alex@agency.com",
+      "is_staff": true,
+      "is_active": true,
+      "years_of_experience": 8
+    }
+  },
+  {
+    "model": "news.redactor",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$fakehash$1234567890abcdef",
+      "is_superuser": false,
+      "username": "emma_watson",
+      "first_name": "Emma",
+      "last_name": "Watson",
+      "email": "emma@agency.com",
+      "is_staff": true,
+      "is_active": true,
+      "years_of_experience": 3
+    }
+  },
+  {
+    "model": "news.redactor",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$fakehash$1234567890abcdef",
+      "is_superuser": false,
+      "username": "robert_downey",
+      "first_name": "Robert",
+      "last_name": "Downey",
+      "email": "robert@agency.com",
+      "is_staff": true,
+      "is_active": true,
+      "years_of_experience": 12
+    }
+  },
+  {
+    "model": "news.redactor",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$fakehash$1234567890abcdef",
+      "is_superuser": false,
+      "username": "clara_oswald",
+      "first_name": "Clara",
+      "last_name": "Oswald",
+      "email": "clara@agency.com",
+      "is_staff": true,
+      "is_active": true,
+      "years_of_experience": 2
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 1,
+    "fields": {
+      "title": "Global Markets Face Unprecedented Shift",
+      "content": "Financial analysts predict major updates in international trading agreements this quarter...",
+      "published_date": "2026-06-20",
+      "topic": 2,
+      "publishers": [2, 3]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 2,
+    "fields": {
+      "title": "New AI Models Revolutionize Software Engineering",
+      "content": "Tech giants release open-source LLMs capable of handling complex system architecture designs...",
+      "published_date": "2026-06-21",
+      "topic": 3,
+      "publishers": [3]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 3,
+    "fields": {
+      "title": "Elections Update: Key Takeaways from the Debate",
+      "content": "Domestic policies and environmental regulations took center stage during last night's discussion...",
+      "published_date": "2026-06-22",
+      "topic": 1,
+      "publishers": [2, 4]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 4,
+    "fields": {
+      "title": "The Rise of Quantum Computing in Cryptography",
+      "content": "Security protocols are being rewritten as quantum processors show massive speedups...",
+      "published_date": "2026-06-23",
+      "topic": 3,
+      "publishers": [3, 4]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 5,
+    "fields": {
+      "title": "Green Energy Inventions Peak in Europe",
+      "content": "Solar and wind energy storage capabilities have doubled due to new solid-state battery tech...",
+      "published_date": "2026-06-24",
+      "topic": 4,
+      "publishers": [4]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 6,
+    "fields": {
+      "title": "Startup Funding Drops but Tech Innovation Persists",
+      "content": "Venture capitalists change strategies, focusing purely on deep-tech and sustainable business models...",
+      "published_date": "2026-06-25",
+      "topic": 2,
+      "publishers": [2]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 7,
+    "fields": {
+      "title": "New Space Telescope Captures Ancient Galaxies",
+      "content": "Astronomers discovered structural details of cosmic elements formed just 300 million years after the Big Bang...",
+      "published_date": "2026-06-26",
+      "topic": 3,
+      "publishers": [5]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 8,
+    "fields": {
+      "title": "Modern Art Exhibition Opens in National Gallery",
+      "content": "The exhibition features digital installations and classical sculptures from leading contemporary artists...",
+      "published_date": "2026-06-27",
+      "topic": 5,
+      "publishers": [6]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 9,
+    "fields": {
+      "title": "Central Bank Announces Digital Currency Pilot",
+      "content": "The framework aims to enhance secure transactions while maintaining standard inflation control tools...",
+      "published_date": "2026-06-28",
+      "topic": 2,
+      "publishers": [3, 5]
+    }
+  },
+  {
+    "model": "news.newspaper",
+    "pk": 10,
+    "fields": {
+      "title": "Summit Addresses Cyber Security Threats",
+      "content": "Global leaders discussed collaborative defense mechanisms against critical infrastructure breaches...",
+      "published_date": "2026-06-28",
+      "topic": 1,
+      "publishers": [2, 6]
+    }
+  }
+]
