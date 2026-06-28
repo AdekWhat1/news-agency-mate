@@ -34,7 +34,7 @@
 
 {% for newspaper in latest_newspapers %}
     <div class="post-preview">
-        <a href="#!">
+        <a href="{% url 'news:newspaper-detail' pk=newspaper.id%}">
             <h2 class="post-title">{{ newspaper.title }}</h2>
             <h3 class="post-subtitle">
                 <span class="badge bg-secondary fs-6">{{ newspaper.topic.name }}</span>
@@ -43,7 +43,7 @@
         <p class="post-meta">
             Published on {{ newspaper.published_date|date:"F d, Y" }} by
             {% for publisher in newspaper.publishers.all %}
-                <a href="#!">{{ publisher.username }}</a>{% if not forloop.last %}, {% endif %}
+                <a href="{% url 'news:redactor-detail' pk=publisher.id%}">{{ publisher.username }}</a>{% if not forloop.last %}, {% endif %}
             {% empty %}
                 Anonymous
             {% endfor %}

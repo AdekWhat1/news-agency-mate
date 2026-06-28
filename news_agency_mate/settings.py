@@ -109,8 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
-
+TIME_ZONE = "Europe/Prague"
 USE_I18N = True
 
 USE_TZ = True
@@ -133,6 +132,8 @@ STATICFILES_DIRS = [
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+LOGIN_URL = "/accounts/login/"
 
 LOGIN_REDIRECT_URL = "/news/"
 
