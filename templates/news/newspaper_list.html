@@ -11,6 +11,15 @@
     <a href="{% url 'news:newspaper-create' %}" class="btn btn-primary btn-sm text-uppercase">Write Article</a>
 </div>
 
+	<form method="get" action="" class="mb-4">
+    <div class="input-group shadow-sm rounded-3 overflow-hidden">
+        {{ search_form }}
+        <button class="btn btn-primary px-4" type="submit">
+            <i class="fas fa-search"></i> Search
+        </button>
+    </div>
+	</form>
+
 {% if newspapers_list %}
     {% for newspaper in newspapers_list %}
         <div class="post-preview">
