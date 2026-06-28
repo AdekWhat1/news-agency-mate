@@ -6,7 +6,7 @@ from news.models import Redactor, Newspaper, Topic
 
 @admin.register(Redactor)
 class RedactorAdmin(UserAdmin):
-    list_display = UserAdmin.list_display + ("years_of_experience", )
+    list_display = UserAdmin.list_display + ("years_of_experience",)
     fieldsets = UserAdmin.fieldsets + (
         (("Additional info", {"fields": ("years_of_experience",)}),)
     )
