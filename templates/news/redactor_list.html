@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Redactors - News Agency{% endblock %}
+
+{% block header_title %}Our Team{% endblock %}
+{% block header_subtitle %}Professional journalists and editors of our agency{% endblock %}
+
+{% block content %}
+<h3 class="fw-bold mb-4">Journalists Catalogue</h3>
+
+{% if redactors_list %}
+    <div class="table-responsive shadow-sm rounded mb-4">
+        <table class="table table-hover align-middle bg-white m-0">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" class="px-4">Username</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col" class="text-center">Experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for redactor in redactors_list %}
+                    <tr>
+                        <td class="px-4 fw-bold text-primary">@{{ redactor.username }}</td>
+
+                        <td class="text-secondary">
+                            {% if redactor.first_name or redactor.last_name %}
+                                {{ redactor.first_name }} {{ redactor.last_name }}
+                            {% else %}
+                                <span class="text-muted fst-italic">No name provided</span>
+                            {% endif %}
+                        </td>
+
+                        <td class="text-center fw-semibold text-dark">
+                            <span class="badge bg-light text-dark border px-3 py-2">
+                                {{ redactor.years_of_experience }} years
+                            </span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include "includes/pagination.html" %}
+
+{% else %}
+    <div class="alert alert-info text-center" role="alert">
+        No redactors found in the database.
+    </div>
+{% endif %}
+{% endblock %}
