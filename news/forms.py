@@ -22,3 +22,27 @@ class RedactorCreationForm(UserCreationForm):
             "email",
             "years_of_experience",
         )
+
+
+class NewspaperSearchForm(forms.Form):
+    title = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Search articles by title..."
+        }),
+    )
+
+
+class RedactorSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Search by username..."
+        }),
+    )

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from news.forms import NewspaperForm, RedactorCreationForm
+from news.forms import NewspaperForm, RedactorCreationForm, RedactorSearchForm, NewspaperSearchForm
 from news.models import Newspaper, Redactor, Topic
 
 
@@ -65,10 +65,25 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     template_name = "news/newspaper_list.html"
     paginate_by = 5
 
+    def get_context_data(
+        self, *, object_list = ..., **kwargs
+    ):
+        context = super().get_context_data(**kwargs)
+        title = self.request.GET.get("title", "")
+        context["search_form"] = NewspaperSearchForm(initial={"title": title})
+        return context
+
     def get_queryset(self):
-        return Newspaper.objects.select_related(
+        queryset = Newspaper.objects.select_related(
             "topic"
-        ).prefetch_related("publishers").order_by("-published_date")
+        ).prefetch_related("publishers")
+        form = NewspaperSearchForm(self.request.GET)
+
+        if form.is_valid():
+            title_query = form.cleaned_data.get("title")
+            if title_query:
+                queryset = queryset.filter(title__icontains=title_query)
+        return queryset
 
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
@@ -106,10 +121,25 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = get_user_model()
-    context_object_name = "redactors_list"
+    context_object_name = "redactor_list"
     template_name = "news/redactor_list.html"
     paginate_by = 5
 
+    def get_context_data(self, *, object_list = ..., **kwargs):
+        context = super().get_context_data(**kwargs)
+        username = self.request.GET.get("username", "")
+        context["search_form"] = RedactorSearchForm(initial={"username": username})
+        return context
+
+    def get_queryset(self):
+        queryset = Redactor.objects.all()
+        form = RedactorSearchForm(self.request.GET)
+
+        if form.is_valid():
+            username_query = form.cleaned_data.get("username")
+            if username_query:
+                queryset = queryset.filter(username__icontains=username_query)
+        return queryset
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = get_user_model()
